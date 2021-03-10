@@ -15,11 +15,20 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { AuthGuard } from 'src/app/services/auth.guard';
 
 const routes: Routes = [
-  { path: 'collection', component: UserCollectionComponent },
-  { path: 'game-details/:id', component: GameDetailsComponent },
-  { path: 'search', component: SearchGamesComponent },
+  {
+    path: 'collection',
+    component: UserCollectionComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'game-details/:id',
+    component: GameDetailsComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: 'search', component: SearchGamesComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
