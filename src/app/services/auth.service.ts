@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../models/user.model';
 // import { environment } from '../../environments/environment.prod';
 import { environment } from '../../environments/environment';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,7 @@ import { environment } from '../../environments/environment';
 export class AuthService {
   url = environment.apiURL;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   login(user: User) {
     var headers = new HttpHeaders().set(
@@ -27,6 +28,11 @@ export class AuthService {
 
   loggedin() {
     return !!localStorage.getItem('jwt');
+  }
+
+  logout() {
+    localStorage.removeItem('jwt');
+    this.router.navigate(['']);
   }
   getToken() {
     return localStorage.getItem('jwt');

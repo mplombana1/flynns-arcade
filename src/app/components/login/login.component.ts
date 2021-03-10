@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.auth.login(user).subscribe(
       (jwt) => {
         localStorage.setItem('jwt', jwt);
-        this.router.navigate(['user-collection']);
+        this.router.navigate(['/home/collection']);
       },
       (err) => {
         this.error = err;

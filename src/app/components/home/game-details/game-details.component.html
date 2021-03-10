@@ -1,0 +1,5 @@
+<app-navbar></app-navbar>
+
+<div *ngIf="$gameDetails | async as game">
+    {{game.title}}
+</div>

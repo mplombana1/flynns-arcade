@@ -1,0 +1,16 @@
+<app-navbar></app-navbar>
+
+<div class="card-container">
+    <mat-card class="card" *ngFor="let game of $games | async">
+        <mat-card-header>
+            <mat-card-title> {{game.title}}</mat-card-title>
+            <mat-card-subtitle>{{game.platform}}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image *ngIf="game.imageUrl" [src]="game.imageUrl">
+        <img mat-card-image *ngIf="!game.imageUrl" src="assets/placeholder.jpg">
+
+        <mat-card-actions>
+            <button mat-button (click)="goToDetailsPage(game.gameId)">VIEW DETAILS</button>
+        </mat-card-actions>
+    </mat-card>
+</div>
