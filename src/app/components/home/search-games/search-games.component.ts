@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { GamesCollectionService } from 'src/app/services/games-collection.service';
-import { Platform } from 'src/app/models/collection.model';
+import { Platform, Search } from 'src/app/models/collection.model';
 import { FormControl } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-search-games',
   templateUrl: './search-games.component.html',
@@ -13,9 +14,15 @@ export class SearchGamesComponent implements OnInit {
   myControl = new FormControl();
   options: Platform[];
   filteredOptions: Observable<Platform[]>;
-  platformId: number = null;
+  platformId: number;
+  gameName: string;
+  $searchResults: Observable<Search>;
+  searchResults: Search[];
 
-  constructor(private collection: GamesCollectionService) {}
+  constructor(
+    private collection: GamesCollectionService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.collection.getAllPlatforms().subscribe((res) => {
@@ -29,11 +36,6 @@ export class SearchGamesComponent implements OnInit {
   }
 
   private _filter(name: string): Platform[] {
-    if (name.length === 1) {
-      console.log('no name');
-      this.platformId = null;
-      console.log(this.platformId);
-    }
     const filterValue = name.toLowerCase();
     return this.options.filter(
       (option) => option.name.toLowerCase().indexOf(filterValue) === 0
@@ -41,25 +43,37 @@ export class SearchGamesComponent implements OnInit {
   }
 
   displayFn(user: Platform) {
-    if (user) {
-      this.platformId = user.platformId;
-
-      console.log('this.platformId:', this.platformId);
-    } else {
-      this.platformId = null;
-    }
     return user && user.name ? user.name : '';
   }
+
+  showPlatformId(e) {
+    this.platformId = e.option.value.platformId;
+  }
+
   search(event: any) {
     console.log(event.target.value);
-    const gameName = event.target.value;
-    console.log('gameName:', gameName.length);
-    if (gameName.length !== 0) {
+    this.gameName = event.target.value;
+
+    console.log(this.platformId, 'PLATFORM');
+    if (this.gameName.length !== 0) {
       this.collection
-        .searchAllGames(gameName, this.platformId)
+        .searchAllGames(this.gameName, this.platformId)
         .subscribe((res) => {
           console.log(res);
+          this.searchResults = res;
         });
+    } else {
+      this.$searchResults = null;
     }
+  }
+
+  goToDetailsPage(id: number) {
+    this.router.navigate([`home/game-details/${id}`]);
+  }
+
+  addGame(gameId: number) {
+    this.collection.addGameToCollection(gameId).subscribe((res) => {
+      console.log(res, 'res');
+    });
   }
 }

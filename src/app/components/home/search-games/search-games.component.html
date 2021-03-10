@@ -5,7 +5,7 @@
     <mat-form-field class="example-full-width">
         <mat-label>Select Game Platform</mat-label>
         <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto">
-        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="showPlatformId($event)">
             <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                 {{option.name}}
             </mat-option>
@@ -14,3 +14,22 @@
 </form>
 
 <input (keyup)="search($event) ">
+
+
+
+<div class="card-container" *ngIf="searchResults">
+    <mat-card class="card" *ngFor="let search of searchResults">
+        <mat-card-header>
+            <mat-card-title> {{search.title}}</mat-card-title>
+            <mat-card-subtitle>{{search.platform}}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image *ngIf="search.imageUrl" [src]="search.imageUrl">
+        <img mat-card-image *ngIf="!search.imageUrl" src="assets/placeholder.jpg">
+
+        <mat-card-actions>
+            <button mat-button (click)="goToDetailsPage(search.gameId)">VIEW DETAILS</button>
+            <button mat-button (click)="addGame(search.gameId)">ADD +</button>
+
+        </mat-card-actions>
+    </mat-card>
+</div>

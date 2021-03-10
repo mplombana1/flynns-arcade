@@ -29,8 +29,13 @@ export class GamesCollectionService {
   }
 
   searchAllGames(gameName: string, platformId: number) {
-    return this.http.get<Search>(
-      `${this.url}/Games/search/${gameName}?platform${platformId}`
+    return this.http.get<Search[]>(
+      // `${this.url}/Games/search/${gameName}?platformId=${platformId}`
+      `${this.url}/Games/search/${gameName}`
     );
+  }
+
+  addGameToCollection(gameId: number) {
+    return this.http.post(`${this.url}/Collection/${gameId}`, gameId);
   }
 }

@@ -1,22 +1,39 @@
-<div class="login">
-    <form [formGroup]="user">
-        <div class="input">
-            <label for="email">Username or Email address</label>
-            <input type="text" name="email" formControlName="username" />
-        </div>
-        <div class="input">
-            <label for="email">Password</label>
+<div class="container">
 
-            <input type="password" formControlName="password" />
-        </div>
-        <div *ngIf="error">
-            {{error.error}}
-        </div>
-        <div class="button">
+    <div class="page-name">
+        <span class="top-title">FLYNN'S</span>
+        <span class="bottom-title">ARCADE</span>
+    </div>
 
-            <button mat-raised-button [disabled]="user.invalid" (click)="submit()">
-                LOGIN
-            </button>
+    <div class="login-container">
+        <div class="welcome-text">
+            <h2>Login</h2>
+            <span>Welcome to Flynn's, Login below..</span>
         </div>
-    </form>
+        <div class="login">
+
+            <form [formGroup]="user">
+                <div class="input">
+                    <label for="email">Username </label>
+                    <input type="text" name="email" formControlName="username" />
+                </div>
+                <div class="input">
+                    <label for="email">Password</label>
+
+                    <input type="password" formControlName="password" />
+                </div>
+                <div *ngIf="error">
+                    {{error.error}}
+                </div>
+                <div class="button">
+
+                    <button mat-raised-button [disabled]="user.invalid" (click)="submit()">
+                        Login
+                    </button>
+
+
+                </div>
+            </form>
+        </div>
+    </div>
 </div>

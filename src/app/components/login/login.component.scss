@@ -1,0 +1,84 @@
+.container {
+  height: 100vh;
+  width: 100%;
+  background-color: #000;
+  display: flex;
+  justify-content: space-evenly;
+  position: absolute;
+  align-items: center;
+  //   font-family: "Press Start 2P";
+  font-family: "Montserrat", sans-serif;
+}
+.page-name {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 400px;
+  height: 400px;
+  color: #fff;
+
+  .top-title {
+    font-family: "Fredoka One", cursive;
+    font-size: 80px;
+  }
+  .bottom-title {
+    font-family: "Press Start 2P";
+    font-size: 100px;
+    color: #fb264e;
+  }
+}
+
+.login-container {
+  height: 500px;
+  width: 500px;
+  background: rgba(0, 0, 0, 0.05);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #fff;
+  padding: 1em 2em;
+  .welcome-text {
+    margin-bottom: 1em;
+    padding-left: 10px;
+  }
+  .login {
+    display: flex;
+    justify-content: center;
+    .input {
+      display: flex;
+      flex-direction: column;
+      margin-top: 1em;
+      width: 480px;
+
+      label {
+        color: #fb264e;
+        margin-bottom: 10px;
+      }
+
+      input {
+        height: 50px;
+        border-radius: 3px;
+        padding-left: 10px;
+        background: #000;
+        border-radius: 5px;
+        border: 1px solid #fff;
+        color: #fff;
+        font-size: 20px;
+      }
+    }
+
+    .button {
+      button {
+        width: 100%;
+        margin-top: 2em;
+        background-color: #fb264e;
+        color: #fff;
+        border-radius: 5px;
+        font-size: 20px;
+      }
+    }
+  }
+}

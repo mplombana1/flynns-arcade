@@ -14,6 +14,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatPaginatorModule } from '@angular/material/paginator';
+
 const routes: Routes = [
   { path: 'collection', component: UserCollectionComponent },
   { path: 'game-details/:id', component: GameDetailsComponent },
@@ -38,6 +40,7 @@ const routes: Routes = [
     MatAutocompleteModule,
     MatFormFieldModule,
     MatInputModule,
+    MatPaginatorModule,
   ],
 })
 export class HomeModule {}

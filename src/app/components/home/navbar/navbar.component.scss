@@ -1,8 +1,14 @@
 mat-toolbar {
-  background-color: #000;
+  background-color: #fb264e;
   color: #fff;
+  .title {
+    font-family: "Fredoka One", cursive;
+  }
 
-  span {
-    cursor: pointer;
+  .links {
+    span {
+      cursor: pointer;
+      font-family: "Montserrat", sans-serif;
+    }
   }
 }
