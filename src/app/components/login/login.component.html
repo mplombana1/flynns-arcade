@@ -1,0 +1,22 @@
+<div class="login">
+    <form [formGroup]="user">
+        <div class="input">
+            <label for="email">Username or Email address</label>
+            <input type="text" name="email" formControlName="username" />
+        </div>
+        <div class="input">
+            <label for="email">Password</label>
+
+            <input type="password" formControlName="password" />
+        </div>
+        <div *ngIf="error">
+            {{error.error}}
+        </div>
+        <div class="button">
+
+            <button mat-raised-button [disabled]="user.invalid" (click)="submit()">
+                LOGIN
+            </button>
+        </div>
+    </form>
+</div>
