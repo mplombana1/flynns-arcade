@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -11,6 +12,7 @@ import { AuthService } from '../../services/auth.service';
 export class LoginComponent implements OnInit, OnDestroy {
   user: FormGroup;
   error: string;
+  isLoading: boolean;
 
   constructor(
     private fb: FormBuilder,
@@ -25,15 +27,18 @@ export class LoginComponent implements OnInit, OnDestroy {
     });
   }
   submit(): void {
+    this.isLoading = true;
     const user = this.user.value;
 
     this.auth.login(user).subscribe(
       (jwt) => {
         localStorage.setItem('jwt', jwt);
+        this.isLoading = false;
         this.router.navigate(['/home/collection']);
       },
       (err) => {
         this.error = err;
+        this.isLoading = false;
         console.log(' this.error:', this.error);
       }
     );

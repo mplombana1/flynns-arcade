@@ -1,35 +1,53 @@
 <app-navbar></app-navbar>
 
+<div class="search-container">
+    <div class="search-bar-container">
+        <mat-form-field class="search-bar">
+            <mat-label>Search All Games</mat-label>
+            <input matInput (keyup)="search($event) ">
+        </mat-form-field>
 
-<form class="example-form">
-    <mat-form-field class="example-full-width">
-        <mat-label>Select Game Platform</mat-label>
-        <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto">
-        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="showPlatformId($event)">
-            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                {{option.name}}
-            </mat-option>
-        </mat-autocomplete>
-    </mat-form-field>
-</form>
+        <div>
+            <mat-form-field class="platform-bar">
+                <mat-label>Select Game Platform</mat-label>
+                <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn"
+                    (optionSelected)="showPlatformId($event)">
+                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                        {{option.name}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+        </div>
 
-<input (keyup)="search($event) ">
+    </div>
 
 
 
-<div class="card-container" *ngIf="searchResults">
-    <mat-card class="card" *ngFor="let search of searchResults">
-        <mat-card-header>
-            <mat-card-title> {{search.title}}</mat-card-title>
-            <mat-card-subtitle>{{search.platform}}</mat-card-subtitle>
-        </mat-card-header>
-        <img mat-card-image *ngIf="search.imageUrl" [src]="search.imageUrl">
-        <img mat-card-image *ngIf="!search.imageUrl" src="assets/placeholder.jpg">
 
-        <mat-card-actions>
-            <button mat-button (click)="goToDetailsPage(search.gameId)">VIEW DETAILS</button>
-            <button mat-button (click)="addGame(search.gameId)">ADD +</button>
+    <div class="card-container" *ngIf="searchResults">
+        <mat-card class="card" *ngFor="let search of searchResults">
+            <mat-card-header>
+                <mat-card-title> {{search.title}}</mat-card-title>
+                <mat-card-subtitle>{{search.platform}}</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image *ngIf="search.imageUrl" [src]="search.imageUrl">
+            <img mat-card-image *ngIf="!search.imageUrl" src="assets/placeholder.jpg">
 
-        </mat-card-actions>
-    </mat-card>
+            <mat-card-actions>
+                <button class="details" mat-button (click)="goToDetailsPage(search.gameId)">VIEW DETAILS</button>
+                <button class="add" *ngIf="!search.isFavorite" mat-button (click)="addGame(search.gameId)">ADD
+                    +</button>
+                <button class="remove" *ngIf="search.isFavorite" mat-button
+                    (click)="removeGame(search.gameId)">Remove</button>
+
+
+            </mat-card-actions>
+        </mat-card>
+    </div>
+
+    <div class="no-display" *ngIf="!searchResults">
+        <span>There's nothing here right now...</span>
+    </div>
+
 </div>

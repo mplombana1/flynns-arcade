@@ -20,8 +20,15 @@ export class Platform {
   name: string;
 }
 
-export class Search {
+export class Result {
   gameId: number;
   title: string;
   platform: string;
+}
+
+export class ResultWithFavorite {
+  gameId: number;
+  title: string;
+  platform: string;
+  isFavorite: boolean;
 }

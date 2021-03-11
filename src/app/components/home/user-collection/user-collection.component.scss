@@ -4,8 +4,9 @@
   justify-content: center;
   background-color: #000;
   // padding: 1em 6em;
+  padding-top: 5%;
   // height: 90vh;
-  overflow-x: scroll;
+  // overflow-x: scroll;
   .card {
     // background: rgba(0, 0, 0, 0.05);
     background-color: #000;
@@ -33,6 +34,49 @@
         background: #fb264e;
         width: 300px;
         font-family: "Montserrat", sans-serif;
+      }
+    }
+  }
+}
+
+.collection-container {
+  height: 95vh;
+  width: 100%;
+  background-color: #000;
+  display: flex;
+  flex-wrap: wrap;
+  overflow-x: scroll;
+
+  .card {
+    height: 500px;
+    width: 500px;
+    border: 1px solid #000;
+    margin: 0 1em;
+    background-color: #fff;
+  }
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  .card-container {
+    padding-top: 14%;
+    .card {
+      width: 240px;
+      img {
+        height: 200px;
+        width: 269px;
+      }
+    }
+  }
+}
+
+@media only screen and (min-device-width: 375px) and (max-device-width: 812px) {
+  .card-container {
+    padding-top: 14%;
+    .card {
+      width: 285px;
+      img {
+        height: 200px;
+        width: 316px;
       }
     }
   }

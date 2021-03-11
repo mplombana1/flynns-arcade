@@ -1,0 +1,11 @@
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.mat-spinner {
+  ::ng-deep circle {
+    stroke: #fb264e;
+  }
+}

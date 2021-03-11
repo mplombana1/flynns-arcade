@@ -1,0 +1,73 @@
+.details-container {
+  color: #fff;
+  padding-top: 5%;
+  display: flex;
+
+  .img-container {
+    width: 35%;
+    display: flex;
+    justify-content: center;
+    img {
+      width: 800px;
+      height: 800px;
+      object-fit: contain;
+    }
+  }
+
+  .text-container {
+    display: flex;
+    flex-direction: column;
+    width: 65%;
+  }
+  .game-title {
+    color: #fb264e;
+    font-size: 50px;
+    font-family: "Montserrat", sans-serif;
+  }
+  .meta-info {
+    margin-top: 1em;
+    font-family: "Montserrat", sans-serif;
+
+    .genre {
+      margin-left: 10px;
+    }
+  }
+  .platforms {
+    margin-top: 1em;
+    font-family: "Montserrat", sans-serif;
+  }
+  .overview {
+    font-family: "Montserrat", sans-serif;
+    padding-right: 10%;
+  }
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  .details-container {
+    flex-direction: column;
+    padding-top: 15%;
+    .img-container {
+      width: 100%;
+      margin-top: 1em;
+      img {
+        height: 200px;
+        width: 200px;
+      }
+    }
+    .text-container {
+      width: 100%;
+      padding: 1em 1em;
+      .game-title {
+        font-size: 30px;
+      }
+      .meta-info {
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+        .genre {
+          margin-left: 0;
+        }
+      }
+    }
+  }
+}

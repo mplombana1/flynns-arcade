@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./user-collection.component.scss'],
 })
 export class UserCollectionComponent implements OnInit {
+  isLoading: boolean;
   constructor(
     private collection: GamesCollectionService,
     private router: Router
@@ -16,7 +17,9 @@ export class UserCollectionComponent implements OnInit {
   $games: Observable<Collection[]>;
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.$games = this.collection.getUserCollection();
+    this.isLoading = false;
   }
 
   goToDetailsPage(id: number) {

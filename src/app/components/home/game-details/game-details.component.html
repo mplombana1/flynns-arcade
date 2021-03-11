@@ -1,5 +1,35 @@
 <app-navbar></app-navbar>
 
-<div *ngIf="$gameDetails | async as game">
-    {{game.title}}
+<div class="details-container" *ngIf="$gameDetails | async as game">
+
+    <div class="img-container">
+        <img *ngIf="game.imageUrl" [src]="game.imageUrl">
+        <img *ngIf="!game.imageUrl" src="assets/placeholder.jpg">
+    </div>
+    <div class="text-container">
+        <div class="game-header">
+            <span class="game-title">{{game.title}}</span>
+            <div class="meta-info">
+                <span style="color:#fb264e;">Relase Date: </span>
+                <span> {{game.releaseDate | date : 'MMM d, y'}} </span>
+                <span class="genre" style="color:#fb264e;">Genre: </span>
+                <span>{{game.genres}}</span>
+                <span class="genre" style="color:#fb264e;">Publisher: </span>
+                <span>{{game.publishers}}</span>
+            </div>
+            <div class="platforms">
+                <span style="color:#fb264e;">Platform(s): </span>
+                <span>{{game.platform.name }}</span>
+            </div>
+            <div class="overview">
+                <p> {{game.overview}}</p>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
 </div>

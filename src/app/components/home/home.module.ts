@@ -16,7 +16,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { AuthGuard } from 'src/app/services/auth.guard';
-
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 const routes: Routes = [
   {
     path: 'collection',
@@ -50,6 +51,8 @@ const routes: Routes = [
     MatFormFieldModule,
     MatInputModule,
     MatPaginatorModule,
+    MatIconModule,
+    MatMenuModule,
   ],
 })
 export class HomeModule {}

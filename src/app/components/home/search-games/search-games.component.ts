@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 import { GamesCollectionService } from 'src/app/services/games-collection.service';
-import { Platform, Search } from 'src/app/models/collection.model';
-import { FormControl } from '@angular/forms';
+import { Collection, Platform, Result } from 'src/app/models/collection.model';
+import { FormControl, Validators } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
 import { Router } from '@angular/router';
 @Component({
@@ -10,15 +10,19 @@ import { Router } from '@angular/router';
   templateUrl: './search-games.component.html',
   styleUrls: ['./search-games.component.scss'],
 })
-export class SearchGamesComponent implements OnInit {
+export class SearchGamesComponent implements OnInit, OnDestroy {
   myControl = new FormControl();
   options: Platform[];
   filteredOptions: Observable<Platform[]>;
   platformId: number;
   gameName: string;
-  $searchResults: Observable<Search>;
-  searchResults: Search[];
+  searchResults: Result[];
 
+  searchSubscription: Subscription;
+  collectionSubscription: Subscription;
+
+  public readonly searchCntrl: FormControl;
+  public readonly searchResults$: Observable<Result[]>;
   constructor(
     private collection: GamesCollectionService,
     private router: Router
@@ -33,6 +37,16 @@ export class SearchGamesComponent implements OnInit {
         map((name) => (name ? this._filter(name) : this.options.slice()))
       );
     });
+
+    this.collectionSubscription = this.collection
+      .getUserCollection()
+      .subscribe((res) => (this.collection.userGames = res));
+  }
+
+  ngOnDestroy(): void {
+    if (this.collectionSubscription) {
+      this.collectionSubscription.unsubscribe();
+    }
   }
 
   private _filter(name: string): Platform[] {
@@ -48,22 +62,32 @@ export class SearchGamesComponent implements OnInit {
 
   showPlatformId(e) {
     this.platformId = e.option.value.platformId;
-  }
-
-  search(event: any) {
-    console.log(event.target.value);
-    this.gameName = event.target.value;
-
-    console.log(this.platformId, 'PLATFORM');
-    if (this.gameName.length !== 0) {
-      this.collection
-        .searchAllGames(this.gameName, this.platformId)
+    if (this.gameName) {
+      this.searchSubscription = this.collection
+        .searchAllGames(this.gameName, {
+          platformId: this.platformId,
+        })
         .subscribe((res) => {
-          console.log(res);
           this.searchResults = res;
         });
+    }
+  }
+
+  search(event?: any) {
+    this.gameName = event.target.value;
+    if (this.gameName.length !== 0) {
+      this.collection
+        .searchAllGames(this.gameName, {
+          platformId: this.platformId,
+        })
+        .subscribe((res) => {
+          this.searchResults = res;
+          if (this.searchResults.length === 0) {
+            this.searchResults = null;
+          }
+        });
     } else {
-      this.$searchResults = null;
+      this.searchResults = null;
     }
   }
 
@@ -73,6 +97,12 @@ export class SearchGamesComponent implements OnInit {
 
   addGame(gameId: number) {
     this.collection.addGameToCollection(gameId).subscribe((res) => {
+      console.log(res, 'res');
+    });
+  }
+
+  removeGame(gameId: number) {
+    this.collection.removeGameFromCollection(gameId).subscribe((res) => {
       console.log(res, 'res');
     });
   }

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="!isLoading">
 
     <div class="page-name">
         <span class="top-title">FLYNN'S</span>
@@ -37,3 +37,5 @@
         </div>
     </div>
 </div>
+
+<app-loader *ngIf="isLoading"></app-loader>

@@ -1,4 +1,7 @@
 mat-toolbar {
+  position: fixed;
+  top: 0;
+  z-index: 1000;
   background-color: #fb264e;
   color: #fff;
   .title {
@@ -9,6 +12,20 @@ mat-toolbar {
     span {
       cursor: pointer;
       font-family: "Montserrat", sans-serif;
+    }
+  }
+  .link-mobile {
+    display: none;
+  }
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  mat-toolbar {
+    .link-mobile {
+      display: initial;
+    }
+    .links {
+      display: none;
     }
   }
 }

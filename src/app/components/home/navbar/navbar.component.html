@@ -10,4 +10,16 @@
         <span (click)="logout()"> Logout</span>
 
     </div>
+    <div class="links-mobile">
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item routerLink="/home/collection">My Games</button>
+            <button mat-menu-item routerLink="/home/search">Game Search</button>
+            <button mat-menu-item (click)="logout()">Logout</button>
+
+        </mat-menu>
+    </div>
+
 </mat-toolbar>
