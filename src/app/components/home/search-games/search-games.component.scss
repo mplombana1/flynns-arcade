@@ -98,6 +98,9 @@
     padding-top: 14%;
     .card {
       width: 240px;
+      mat-card-actions {
+        width: 109%;
+      }
       img {
         height: 200px;
         width: 269px;
