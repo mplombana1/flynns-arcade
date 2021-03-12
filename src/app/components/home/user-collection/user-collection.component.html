@@ -1,8 +1,8 @@
 <app-navbar></app-navbar>
 
 <div class="container">
-    <div class="card-container">
-        <mat-card class="card" *ngFor="let game of $games | async">
+    <div class="card-container" *ngIf="games$ | async as games; else indicator">
+        <mat-card class="card" *ngFor="let game of games">
             <mat-card-header>
                 <mat-card-title> {{game.title}}</mat-card-title>
                 <mat-card-subtitle>{{game.platform}}</mat-card-subtitle>
@@ -16,3 +16,7 @@
         </mat-card>
     </div>
 </div>
+
+<ng-template #indicator>
+    <app-loader></app-loader>
+</ng-template>

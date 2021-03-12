@@ -6,6 +6,7 @@ import { GameDetailsComponent } from './game-details/game-details.component';
 import { SearchGamesComponent } from './search-games/search-games.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NavbarComponent } from './navbar/navbar.component';
+import { LoaderComponent } from 'src/app/components/home/loader/loader.component';
 
 // ANGULAR MATERIAL
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -17,6 +18,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { AuthGuard } from 'src/app/services/auth.guard';
 import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatMenuModule } from '@angular/material/menu';
 const routes: Routes = [
   {
@@ -30,6 +32,16 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   { path: 'search', component: SearchGamesComponent, canActivate: [AuthGuard] },
+  {
+    path: 'search/:gamename',
+    component: SearchGamesComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'search/:gamename/:platform',
+    component: SearchGamesComponent,
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({
@@ -38,6 +50,7 @@ const routes: Routes = [
     GameDetailsComponent,
     SearchGamesComponent,
     NavbarComponent,
+    LoaderComponent,
   ],
   imports: [
     CommonModule,
@@ -53,6 +66,7 @@ const routes: Routes = [
     MatPaginatorModule,
     MatIconModule,
     MatMenuModule,
+    MatProgressSpinnerModule,
   ],
 })
 export class HomeModule {}

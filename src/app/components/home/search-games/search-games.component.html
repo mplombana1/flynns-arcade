@@ -22,32 +22,36 @@
 
     </div>
 
+    <div *ngIf="!isLoading">
+        <div class="card-container" *ngIf="searchResults">
+            <mat-card class="card" *ngFor="let search of searchResults">
+                <mat-card-header>
+                    <mat-card-title> {{search.title}}</mat-card-title>
+                    <mat-card-subtitle>{{search.platform}}</mat-card-subtitle>
+                </mat-card-header>
+                <img mat-card-image *ngIf="search.imageUrl" [src]="search.imageUrl">
+                <img mat-card-image *ngIf="!search.imageUrl" src="assets/placeholder.jpg">
+
+                <mat-card-actions>
+                    <button class="details" mat-button (click)="goToDetailsPage(search.gameId)">VIEW DETAILS</button>
+                    <button class="add" *ngIf="!search.isFavorite" mat-button
+                        (click)="addGame(search.gameId,search)">ADD
+                        +</button>
+                    <button class="remove" *ngIf="search.isFavorite" mat-button
+                        (click)="removeGame(search.gameId)">Remove</button>
 
 
+                </mat-card-actions>
+            </mat-card>
+        </div>
 
-    <div class="card-container" *ngIf="searchResults">
-        <mat-card class="card" *ngFor="let search of searchResults">
-            <mat-card-header>
-                <mat-card-title> {{search.title}}</mat-card-title>
-                <mat-card-subtitle>{{search.platform}}</mat-card-subtitle>
-            </mat-card-header>
-            <img mat-card-image *ngIf="search.imageUrl" [src]="search.imageUrl">
-            <img mat-card-image *ngIf="!search.imageUrl" src="assets/placeholder.jpg">
-
-            <mat-card-actions>
-                <button class="details" mat-button (click)="goToDetailsPage(search.gameId)">VIEW DETAILS</button>
-                <button class="add" *ngIf="!search.isFavorite" mat-button (click)="addGame(search.gameId)">ADD
-                    +</button>
-                <button class="remove" *ngIf="search.isFavorite" mat-button
-                    (click)="removeGame(search.gameId)">Remove</button>
-
-
-            </mat-card-actions>
-        </mat-card>
+        <div class="no-display" *ngIf="!searchResults">
+            <span>There's nothing here right now...</span>
+        </div>
     </div>
 
-    <div class="no-display" *ngIf="!searchResults">
-        <span>There's nothing here right now...</span>
-    </div>
+</div>
 
+<div *ngIf="isLoading">
+    <app-loader></app-loader>
 </div>

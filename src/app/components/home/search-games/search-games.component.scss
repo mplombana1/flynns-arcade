@@ -61,6 +61,8 @@
     mat-card-actions {
       display: flex;
       justify-content: center;
+      width: 422px;
+
       button {
         color: #fff;
         width: 50%;
@@ -68,6 +70,7 @@
 
       .add {
         background-color: #17c263;
+        content: "ADD +";
       }
       .details {
         background-color: #fb264e;

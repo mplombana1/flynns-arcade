@@ -2,9 +2,11 @@
   color: #fff;
   padding-top: 5%;
   display: flex;
+  align-items: center;
+  padding: 0 6em;
 
   .img-container {
-    width: 35%;
+    // width: 35%;
     display: flex;
     justify-content: center;
     img {
@@ -17,7 +19,7 @@
   .text-container {
     display: flex;
     flex-direction: column;
-    width: 65%;
+    // width: 65%;
   }
   .game-title {
     color: #fb264e;

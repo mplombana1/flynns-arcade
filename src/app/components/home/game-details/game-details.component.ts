@@ -10,7 +10,7 @@ import { GameDetails } from 'src/app/models/collection.model';
   styleUrls: ['./game-details.component.scss'],
 })
 export class GameDetailsComponent implements OnInit {
-  $gameDetails: Observable<GameDetails>;
+  gameDetails$: Observable<GameDetails>;
 
   constructor(
     private router: ActivatedRoute,
@@ -19,10 +19,6 @@ export class GameDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.router.snapshot.paramMap.get('id');
-    this.$gameDetails = this.collection.getGameDetails(id);
-
-    // this.collection.getGameDetails(id).subscribe((res) => {
-    //   console.log(res);
-    // });
+    this.gameDetails$ = this.collection.getGameDetails(id);
   }
 }

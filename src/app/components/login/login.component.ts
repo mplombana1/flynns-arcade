@@ -27,18 +27,15 @@ export class LoginComponent implements OnInit, OnDestroy {
     });
   }
   submit(): void {
-    this.isLoading = true;
     const user = this.user.value;
 
     this.auth.login(user).subscribe(
       (jwt) => {
         localStorage.setItem('jwt', jwt);
-        this.isLoading = false;
         this.router.navigate(['/home/collection']);
       },
       (err) => {
         this.error = err;
-        this.isLoading = false;
         console.log(' this.error:', this.error);
       }
     );

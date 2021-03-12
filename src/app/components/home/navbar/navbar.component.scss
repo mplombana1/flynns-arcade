@@ -14,18 +14,24 @@ mat-toolbar {
       font-family: "Montserrat", sans-serif;
     }
   }
-  .link-mobile {
+  .links-mobile {
     display: none;
   }
 }
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
   mat-toolbar {
-    .link-mobile {
-      display: initial;
-    }
     .links {
-      display: none;
+      span {
+        display: none;
+      }
+    }
+    .links-mobile {
+      display: block;
     }
   }
+}
+
+.is-active {
+  border-bottom: 1px solid #fff;
 }

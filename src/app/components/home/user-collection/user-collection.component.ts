@@ -14,12 +14,10 @@ export class UserCollectionComponent implements OnInit {
     private collection: GamesCollectionService,
     private router: Router
   ) {}
-  $games: Observable<Collection[]>;
+  games$: Observable<Collection[]>;
 
   ngOnInit(): void {
-    this.isLoading = true;
-    this.$games = this.collection.getUserCollection();
-    this.isLoading = false;
+    this.games$ = this.collection.getUserCollection();
   }
 
   goToDetailsPage(id: number) {

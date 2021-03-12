@@ -4,9 +4,9 @@
     </div>
 
     <div class="links">
-        <span routerLink="/home/collection">Collection</span>
+        <span routerLink="/home/collection" [routerLinkActive]="['is-active']">Collection</span>
 
-        <span routerLink="/home/search">Search Games</span>
+        <span routerLink="/home/search" [routerLinkActive]="['is-active']">Search Games</span>
         <span (click)="logout()"> Logout</span>
 
     </div>

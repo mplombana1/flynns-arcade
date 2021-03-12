@@ -1,11 +1,12 @@
 <app-navbar></app-navbar>
 
-<div class="details-container" *ngIf="$gameDetails | async as game">
+<div class="details-container" *ngIf="gameDetails$ | async as game">
 
     <div class="img-container">
         <img *ngIf="game.imageUrl" [src]="game.imageUrl">
         <img *ngIf="!game.imageUrl" src="assets/placeholder.jpg">
     </div>
+
     <div class="text-container">
         <div class="game-header">
             <span class="game-title">{{game.title}}</span>
@@ -25,11 +26,5 @@
                 <p> {{game.overview}}</p>
             </div>
         </div>
-
-
     </div>
-
-
-
-
 </div>
