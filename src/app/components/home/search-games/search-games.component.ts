@@ -6,9 +6,9 @@ import {
   Result,
   ResultWithFavorite,
 } from 'src/app/models/collection.model';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-search-games',
   templateUrl: './search-games.component.html',
@@ -27,6 +27,7 @@ export class SearchGamesComponent implements OnInit, OnDestroy {
   addSubscription: Subscription;
   deleteSubscription: Subscription;
   collectionSubscription: Subscription;
+  platformSubscription: Subscription;
 
   public readonly searchCntrl: FormControl;
   public readonly searchResults$: Observable<Result[]>;
@@ -36,14 +37,16 @@ export class SearchGamesComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.collection.getAllPlatforms().subscribe((res) => {
-      this.options = res;
-      this.filteredOptions = this.myControl.valueChanges.pipe(
-        startWith(''),
-        map((value) => (typeof value === 'string' ? value : value.name)),
-        map((name) => (name ? this._filter(name) : this.options.slice()))
-      );
-    });
+    this.platformSubscription = this.collection
+      .getAllPlatforms()
+      .subscribe((res) => {
+        this.options = res;
+        this.filteredOptions = this.myControl.valueChanges.pipe(
+          startWith(''),
+          map((value) => (typeof value === 'string' ? value : value.name)),
+          map((name) => (name ? this._filter(name) : this.options.slice()))
+        );
+      });
 
     this.collectionSubscription = this.collection
       .getUserCollection()
@@ -59,6 +62,9 @@ export class SearchGamesComponent implements OnInit, OnDestroy {
     }
     if (this.deleteSubscription) {
       this.deleteSubscription.unsubscribe();
+    }
+    if (this.platformSubscription) {
+      this.platformSubscription.unsubscribe();
     }
   }
 
